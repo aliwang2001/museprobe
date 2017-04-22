@@ -18,8 +18,10 @@ function getFeatures(id) {
     
     for (var feature in data) {
       if (data.hasOwnProperty(feature)) {
-        labels.push(feature);
-        values.push(data[feature]);
+        if(data[feature] <= 1 && data[feature] >= 0) {
+          labels.push(feature);
+          values.push(data[feature]);
+        }
       }
     }
     
@@ -54,7 +56,8 @@ function getFeatures(id) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
+                        beginAtZero:true,
+                        max: 1
                     }
                 }]
             }
