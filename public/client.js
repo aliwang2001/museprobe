@@ -4,6 +4,9 @@
 // by default, you've got jQuery,
 // add other scripts at the bottom of index.html
 
+var ctx = $("#features-chart");
+//var context = ctx.getContext('2d');
+
 function getFeatures(id) {
   console.log('hi');
 
@@ -11,13 +14,12 @@ function getFeatures(id) {
 
   $.get(query, function(data) {
     console.log(data)
-    $('#features').text(JSON.stringify(data, null, 4));
     
     let labels = [];
     let values = [];
     
     for (var feature in data) {
-      if (data.hasOwnProperty(feature)) {
+      if (data.hasOwnProperty(feature) && feature !== 'key' && feature !== 'mode') {
         if(data[feature] <= 1 && data[feature] >= 0) {
           labels.push(feature);
           values.push(data[feature]);
@@ -25,7 +27,9 @@ function getFeatures(id) {
       }
     }
     
-    var ctx = $("#features-chart");
+    //context.clearRect(0, 0, ctx.width, ctx.height);
+    
+    
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
