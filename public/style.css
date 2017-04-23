@@ -100,3 +100,9 @@ footer > a {
     max-height: auto;
   }
 }
+
+@media screen and (min-width: 1280px) {
+  #results {
+    max-height: 20vh;
+  }
+}
