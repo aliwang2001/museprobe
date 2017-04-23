@@ -35,7 +35,6 @@ function getFeatures(id) {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Value',
                 data: values,
                 backgroundColor: [
                     'rgba(30,215,96, 0.2)',
@@ -63,6 +62,9 @@ function getFeatures(id) {
             }]
         },
         options: {
+            legend: {
+              display: false
+           },
             scales: {
                 yAxes: [{
                     ticks: {

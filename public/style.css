@@ -81,8 +81,22 @@ footer > a {
   text-decoration: line-through;
 }
 
+#results {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 30vh;
+}
+
 #results li {
   color: skyblue;
   text-decoration: underline;
   cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+  #results {
+    display: inline-block;
+    max-height: auto;
+  }
 }
