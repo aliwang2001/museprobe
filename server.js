@@ -34,7 +34,7 @@ app.get("/", function (request, response) {
 });
 
 app.get("/search", function (request, response) {
-  spotifyApi.searchTracks(request.query.query)
+  spotifyApi.searchTracks(request.query.query, { limit: 10 })
   .then(function(data) {
     console.log(data.body);
     response.send(data.body);

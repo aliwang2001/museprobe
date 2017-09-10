@@ -4,10 +4,17 @@
 // by default, you've got jQuery,
 // add other scripts at the bottom of index.html
 
-var ctx = $("#features-chart");
-//var context = ctx.getContext('2d');
+var ctx;
+
+function resetCanvas() {
+  $('#features-chart').remove(); // this is my <canvas> element
+  $('#features-chart-container').append('<canvas id="features-chart"><canvas>');
+  ctx = document.querySelector('#features-chart');
+};
 
 function getFeatures(id) {
+  
+  resetCanvas();
 
   let query = '/features?id=' + id;
 
@@ -26,26 +33,23 @@ function getFeatures(id) {
       }
     }
     
-    //context.clearRect(0, 0, ctx.width, ctx.height);
-    
-    
     var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                data: values,
-                backgroundColor: [
-                    'rgba(30,215,96, 0.2)',
-                    'rgba(245,115,160, 0.2)',
-                    'rgba(80,155,245, 0.2)',
-                    'rgba(255,100,55, 0.2)',
-                    'rgba(180,155,200, 0.2)',
-                    'rgba(250,230,45, 0.2)',
-                    'rgba(0,100,80, 0.2)',
-                    'rgba(175,40,150, 0.2)',
-                    'rgba(30,50,100, 0.2)'
-                ],
+      type: 'bar',
+      data: {
+        labels: labels,
+          datasets: [{
+            data: values,
+            backgroundColor: [
+              'rgba(30,215,96, 0.9)',
+              'rgba(245,115,160, 0.9)',
+              'rgba(80,155,245, 0.9)',
+              'rgba(255,100,55, 0.9)',
+              'rgba(180,155,200, 0.9)',
+              'rgba(250,230,45, 0.9)',
+              'rgba(0,100,80, 0.9)',
+              'rgba(175,40,150, 0.9)',
+              'rgba(30,50,100, 0.9)'
+            ],
                 borderColor: [
                     'rgba(30,215,96, 1)',
                     'rgba(245,115,160, 1)',
