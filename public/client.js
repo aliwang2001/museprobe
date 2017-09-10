@@ -8,7 +8,6 @@ var ctx = $("#features-chart");
 //var context = ctx.getContext('2d');
 
 function getFeatures(id) {
-  console.log('hi');
 
   let query = '/features?id=' + id;
 
@@ -99,7 +98,7 @@ $(function() {
     
       data.tracks.items.forEach(function(track, index) {
         resultIDs.push(track.id);
-        let newEl = $('<li onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
+        let newEl = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
         $('#results').append(newEl);
       }); 
       

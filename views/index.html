@@ -1,36 +1,33 @@
 <!-- This is a static file -->
 <!-- served from your routes in server.js -->
 
-<!-- You might want to try something fancier: -->
-<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
-<!-- pug: https://pugjs.org/ -->
-<!-- haml: http://haml.info/ -->
-<!-- hbs(handlebars): http://handlebarsjs.com/ -->
-
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Instant Audio Features</title>
+    <title>Spotify Audio Features</title>
     <meta name="description" content="A cool thing made with Glitch">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://sp-bootstrap.global.ssl.fastly.net/8.0.0/sp-bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <header>
       <h1>
-        Instant Audio Features
+        Spotify Audio Features
       </h1>
+      <p>
+        Learn more about the audio properties of your favourite tracks, from "danceability" to "energy" to "acousticness".
+      </p>
     </header>
 
     <main>
-      <p class="bold">Hej!</p>
-      <p>Search for a track:</p>
+      <h4>Let's search for a track:</h4>
       <form>
-        <input type="text" maxlength="100" placeholder="Search for a track on Spotify">
-        <button type="submit">Submit</button>
+        <input type="text" maxlength="100" placeholder="Track Name">
+        <button class="btn btn-sm btn-aubergine" type="submit">Submit</button>
       </form>
       <section class="features">
         <ul id="results">
@@ -42,7 +39,7 @@
     </main>
 
     <footer>
-      <a href="https://glitch.com">
+      <a href="https://glitch.com/edit/#!/audio-features">
         Remix this in Glitch
       </a>
     </footer>
