@@ -32,6 +32,7 @@ function getFeatures(id) {
         }
       }
     }
+    console.log(da)
     
     var myChart = new Chart(ctx, {
       type: 'bar',
