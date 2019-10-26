@@ -16,19 +16,16 @@ function getFeatures(id) {
   
   resetCanvas();
 
-  //let query = '/features?id=' + id;
+  let query = '/features?id=' + id;
   let a_query = '/analysis?id=' + id;
 
   $.get(a_query, function(data) {
-    //console.log(data)
+    
+    console.log(data)
     
     let labels = [];
     let values = [];
     
-    let pitches = data["segments"]["pitches"]
-    console.log(pitches)
-    
-    /*
     for (var feature in data) {
       if (data.hasOwnProperty(feature) && feature !== 'key' && feature !== 'mode') {
         if(data[feature] <= 1 && data[feature] >= 0) {
@@ -37,7 +34,7 @@ function getFeatures(id) {
         }
       }
     }
-    */
+  
     
     /*
     var myChart = new Chart(ctx, {
