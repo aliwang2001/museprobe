@@ -16,14 +16,19 @@ function getFeatures(id) {
   
   resetCanvas();
 
-  let query = '/features?id=' + id;
+  //let query = '/features?id=' + id;
+  let a_query = '/analysis?id=' + id;
 
-  $.get(query, function(data) {
-    console.log(data)
+  $.get(a_query, function(data) {
+    //console.log(data)
     
     let labels = [];
     let values = [];
     
+    let pitches = data["segments"]["pitches"]
+    console.log(pitches)
+    
+    /*
     for (var feature in data) {
       if (data.hasOwnProperty(feature) && feature !== 'key' && feature !== 'mode') {
         if(data[feature] <= 1 && data[feature] >= 0) {
@@ -32,7 +37,9 @@ function getFeatures(id) {
         }
       }
     }
+    */
     
+    /*
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -78,13 +85,14 @@ function getFeatures(id) {
             }
         }
     });
+    */
   });
   
 
 }
 
 $(function() {
-  console.log('hello world :o');
+  //console.log('hello world :o');
   
   let trackID = '';
   let searchQuery = '';
