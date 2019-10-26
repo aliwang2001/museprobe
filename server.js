@@ -53,6 +53,16 @@ app.get("/features", function (request, response) {
   });
 });
 
+app.get("/analysis", function (request, response) {
+  spotifyApi.getAudioAnalysisForTrack(request.query.id)
+  .then(function(data) {
+    console.log(data.body);
+    response.send(data.body);
+  }, function(err) {
+    console.log(err)
+  });
+});
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
