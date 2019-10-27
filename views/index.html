@@ -11,24 +11,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <header>
-      <h1>
-        Let's Break it Down
-      </h1>
-      <p>
-        Enter the name of your favorite spotify track to find its melody, among other properties.
+    <div class="jumbotron">
+      <h1 class="display-4">Let's Break it Down</h1>
+      <p class="lead">Enter the name of your favorite spotify track to find its melody, among other properties.</p>
+      <hr class="my-4">
+      <p>Let's search for a track:</p>
+      <p class="lead">
+        <form>
+        <input class="search" type="text" maxlength="100" placeholder="Track Name">
+        <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
       </p>
-    </header>
+    </div>
 
     <main>
-      <h4>Let's search for a track:</h4>
-      <form>
-        <input type="text" maxlength="100" placeholder="Track Name">
-        <button class="btn btn-sm btn-primary" type="submit">Submit</button>
-      </form>
+      <h4></h4>
+      
       <section class="features">
         <ul id="results">
         </ul>

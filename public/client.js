@@ -5,16 +5,7 @@
 // add other scripts at the bottom of index.html
 
 var ctx;
-
-function resetCanvas() {
-  $('#features-chart').remove(); // this is my <canvas> element
-  $('#features-chart-container').append('<canvas id="features-chart"><canvas>');
-  ctx = document.querySelector('#features-chart');
-};
-
-function getFeatures(id) {
-  
-  var keys = {
+var keys = {
   0: "C",
   1: "C#/D♭",
   2: "D",
@@ -29,6 +20,14 @@ function getFeatures(id) {
   11: "B"
   
 }
+function resetCanvas() {
+  $('#features-chart').remove(); // this is my <canvas> element
+  $('#features-chart-container').append('<canvas id="features-chart"><canvas>');
+  ctx = document.querySelector('#features-chart');
+};
+
+function getFeatures(id) {
+
 var modes = {
   0: "minor",
   1: "Major"
@@ -159,7 +158,20 @@ function getAnalysis(id) {
                 backgroundColor: '#efb557', 
             }]
       },
-      options: options
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+                callback: function(value, index, values) {
+                    // for a value (tick) equals to 8
+                    return keys[value];
+                stepSize: 1
+                    // 'junior-dev' will be returned instead and displayed on your chart
+                }
+            }
+        }]
+    }
+}
 });
     /*
     var myChart = new Chart(ctx, {
@@ -219,7 +231,7 @@ $(function() {
     
       data.tracks.items.forEach(function(track, index) {
         resultIDs.push(track.id);
-        let newEl1 = $('<h2 class="text-salmon"></h2>').text(track.name + '   |   ' + track.artists[0].name);
+        let newEl1 = $('<p class="text-salmon"></p>').text(track.name + '   |   ' + track.artists[0].name);
         let newEl2 = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text('Basic Track Overview');
         let newEl3 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text('Chord Progressions');
         //let newEl3 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text('See melody and chord progressions');
