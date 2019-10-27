@@ -27,12 +27,10 @@ function getFeatures(id) {
     let values = [];
     
     for (var feature in data) {
-      if (data.hasOwnProperty(feature) && feature !== 'key' && feature !== 'mode') {
-        if(data[feature] <= 1 && data[feature] >= 0) {
-          labels.push(feature);
-          values.push(data[feature]);
+      if (data.hasOwnProperty(feature) && (feature == 'key' || feature == 'mode')) {
+        labels.push(feature);
+        values.push(data[feature]);
         }
-      }
     }
   
     
