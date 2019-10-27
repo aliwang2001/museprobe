@@ -26,14 +26,21 @@ function getFeatures(id) {
     let labels = [];
     let values = [];
     
-    var feature = data["sections"]
+    var feature = data["segments"]
     
     for (var i = 0; i < feature.length; i++) {
       labels.push(i);
-      values.push(feature[i]["tempo_confidence"]);
+      
+      var index = 0;
+      for (var j = 0; j < feature[i]["pitches"].length; j++){
+        if (feature[i]["pitches"][index] < feature[i]["pitches"][j]) {
+          index = j;
+        }
+      }
+      values.push(j);
     }
     
-    //labels = labels.slice(0,100)
+    labels = labels.slice(0,50)
     /*
     for (var feature in data) {
       labels.push(feature);
@@ -130,6 +137,8 @@ $(function() {
         resultIDs.push(track.id);
         let newEl = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
         $('#results').append(newEl);
+        
+      
       }); 
       
     });
