@@ -26,7 +26,7 @@ function getFeatures(id) {
     let labels = [];
     let values = [];
     
-    var feature = data["segments"]
+    var feature = data["segments"];
     
     for (var i = 0; i < feature.length; i++) {
       labels.push(i);
@@ -37,64 +37,18 @@ function getFeatures(id) {
           index = j;
         }
       }
-      values.push(j);
+      values.push(index);
     }
     
-    labels = labels.slice(0,50)
-    /*
-    for (var feature in data) {
-      labels.push(feature);
-      console.log('hello')
-      values.push(data[feature]);
-      for(var details in feature) {
-        deets.push(data[feature][details]);
-      }
-      
-    }
-    */
-    
-    
-    /*
-    for (var feature in data) {
-      if (data.hasOwnProperty(feature)) {
-        if(data[feature] >= 0){
-          labels.push(feature);
-          values.push(data[feature]);
-        }
-      }
-    }
-    */
-  
+    values = values.slice(0, 50);
+    labels = labels.slice(0, 50);
     
     var myChart = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: labels,
           datasets: [{
             data: values,
-            backgroundColor: [
-              'rgba(30,215,96, 0.9)',
-              'rgba(245,115,160, 0.9)',
-              'rgba(80,155,245, 0.9)',
-              'rgba(255,100,55, 0.9)',
-              'rgba(180,155,200, 0.9)',
-              'rgba(250,230,45, 0.9)',
-              'rgba(0,100,80, 0.9)',
-              'rgba(175,40,150, 0.9)',
-              'rgba(30,50,100, 0.9)'
-            ],
-                borderColor: [
-                    'rgba(30,215,96, 1)',
-                    'rgba(245,115,160, 1)',
-                    'rgba(80,155,245, 1)',
-                    'rgba(255,100,55, 1)',
-                    'rgba(180,155,200, 1)',
-                    'rgba(250,230,45, 1)',
-                    'rgba(0,100,80, 1)',
-                    'rgba(175,40,150, 1)',
-                    'rgba(30,50,100, 1)'
-                ],
-                borderWidth: 1
             }]
         },
         options: {
@@ -104,9 +58,7 @@ function getFeatures(id) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true,
-                        max: 1
-                    }
+                        beginAtZero:true                    }
                 }]
             }
         }
