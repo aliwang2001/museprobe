@@ -25,8 +25,14 @@ function getFeatures(id) {
     
     let labels = [];
     let values = [];
-    let deets = [];
     
+    var feature = data["bars"]
+    
+    for (var i = 0; i < feature.length; i++) {
+      labels.push(i);
+      values.push(feature[i]["confidence"]);
+    }
+    /*
     for (var feature in data) {
       labels.push(feature);
       console.log('hello')
@@ -36,6 +42,7 @@ function getFeatures(id) {
       }
       
     }
+    */
     
     
     /*
