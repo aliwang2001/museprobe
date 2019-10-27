@@ -28,20 +28,16 @@ function getFeatures(id) {
     let deets = [];
     
     for (var feature in data) {
+      labels.push(feature);
+      console.log('hello')
+      values.push(data[feature]);
       for(var details in feature) {
-        labels.push(feature);
-        values.push(data[feature])
-        deets.push(data[feature][details])
-        
+        deets.push(data[feature][details]);
       }
+      
     }
     
-    console.log("DETAILS")
-    console.log(deets)
-    console.log("LABELS")
-    console.log(labels)
-    console.log("VALUES")
-    console.log(values)
+    
     /*
     for (var feature in data) {
       if (data.hasOwnProperty(feature)) {
