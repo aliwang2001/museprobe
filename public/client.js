@@ -44,7 +44,7 @@ var modes = {
     
   document.getElementById("key").innerHTML = "Key: " + keys[key] + " " + modes[mode];
   document.getElementById("tempo").innerHTML = "Tempo: " + tempo + " BPM";
-  document.getElementById("time_sign").innerHTML = "Time signature: " + time_signature + " beats per measure";
+  document.getElementById("time_sign").innerHTML = "Time Signature: " + time_signature + " beats per measure";
     
   });
 }
@@ -161,15 +161,15 @@ function getAnalysis(id) {
       options: {
         scales: {
           yAxes: [{
-            ticks: {
+            ticks: {     
+            },
                 callback: function(value, index, values) {
                     // for a value (tick) equals to 8
                     return keys[value];
-                stepSize: 1
                     // 'junior-dev' will be returned instead and displayed on your chart
                 }
             }
-        }]
+        ]
     }
 }
 });

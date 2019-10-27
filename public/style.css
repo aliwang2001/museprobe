@@ -22,8 +22,12 @@ h1 {
 }
 
 .jumbotron{
-    background-color: #8A2BE2;
-    text-align: center;
+    background-color: #EEEEEE;
+}
+
+.btn-primary {
+  background-color: #6e96f2;
+  border: none;
 }
 
 h3 {
