@@ -12,13 +12,20 @@ function resetCanvas() {
   ctx = document.querySelector('#features-chart');
 };
 
+function getFeatures(id) {
+  let query = '/features?id=' + id;
+  
+  $.get(query, function(data) {
+    
+});
+}
+
 
 
 function getAnalysis(id) {
   
   resetCanvas();
 
-  //let query = '/features?id=' + id;
   let a_query = '/analysis?id=' + id;
 
   $.get(a_query, function(data) {
@@ -26,7 +33,6 @@ function getAnalysis(id) {
     console.log(data)
     
     let labels = [];
-    //let values = [];
     let max1_values = [];
     let max2_values = [];
     let max3_values = [];
@@ -51,10 +57,19 @@ function getAnalysis(id) {
     for (var i = 0; i < 50; i++) {
       labels.push(i);
       let seg_list = feature[i]["pitches"]
-      var max_value = Math.max(seg_list)
-      var max_index = seg_list.indexOf(max_value)
-      values.push(max_index)
-      
+      var max1_value = Math.max(seg_list)
+      var max1_index = seg_list.indexOf(max1_value)
+      max1_values.push(max1_index)
+      seg_list.splice(max1_index, 1)
+      var max2_value = Math.max(seg_list)
+      var max2_index = seg_list.indexOf(max2_value)
+      max2_values.push(max2_index)
+      seg_list.splice(max2_index, 1)
+      var max3_value = Math.max(seg_list)
+      var max3_index = seg_list.indexOf(max3_value)
+      max3_values.push(max3_index)
+    }
+    
       
     /**
       var index = 0;
@@ -71,21 +86,40 @@ function getAnalysis(id) {
       type: 'bar',
       data: {
         labels: labels,
+        datasets: [
+          {
+            label: "Population (millions)",
+            data: max1_values
+          }
+        ]
+      },
+      options: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'Predicted world population (millions) in 2050'
+        }
+      }
+    });
+  });
+    /*
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
         datasets: [{
             label: "max1",
-            type: "line",
+            type: "bar",
             borderColor: "#000000",
             data: max1_values,
-            fill: false
           }, {
             label: "max2",
-            type: "line",
+            type: "bar",
             borderColor: "#3e95cd",
             data: max2_values,
-            fill: false
           }, {
             label: "max3",
-            type: "line",
+            type: "bar",
             borderColor: "#8e5ea2",
             data: max3_values,
           }
@@ -100,6 +134,7 @@ function getAnalysis(id) {
       }
     });
   });
+  */
   
 
 }
@@ -120,14 +155,16 @@ $(function() {
     $.get(searchQuery, function(data) {
       
       $('#results').empty();
+
     
       data.tracks.items.forEach(function(track, index) {
         resultIDs.push(track.id);
-        let newEl1 = $('<h2 class="text-salmon"></h2>').text(track.name + '   |   ' + track.artists[0].name);
-        let newEl2 = $('<p class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></p>').text('Click here to get basic track overview');
-        let newEl3 = $('<p class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></p>').text('See melody and chord progressions');
-        $('#results').append(newEl);
-        $('#results').append(newEl2);
+        let newEl1 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
+        //let newEl2 = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text('Click here to get basic track overview');
+        //let newEl3 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text('See melody and chord progressions');
+        $('#results').append(newEl1);
+        //$('#results').append(newEl2);
+        //$('#results').append(newEl2);
         
       
       }); 
