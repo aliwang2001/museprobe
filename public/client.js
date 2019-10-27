@@ -59,10 +59,10 @@ function getAnalysis(id) {
       let seg_list = feature[i]["pitches"];
       var max1_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
       max1_values.push(max1_index);
-      seg_list.splice(max1_index, 1);
+      seg_list[max1_index] = 0;
       var max2_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
       max2_values.push(max2_index);
-      seg_list.splice(max2_index, 1);
+      seg_list[max2_index] = 0;
       var max3_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
       max3_values.push(max3_index);
     }
