@@ -12,11 +12,13 @@ function resetCanvas() {
   ctx = document.querySelector('#features-chart');
 };
 
-function getFeatures(id) {
+
+
+function getAnalysis(id) {
   
   resetCanvas();
 
-  let query = '/features?id=' + id;
+  //let query = '/features?id=' + id;
   let a_query = '/analysis?id=' + id;
 
   $.get(a_query, function(data) {
@@ -24,7 +26,7 @@ function getFeatures(id) {
     console.log(data)
     
     let labels = [];
-    let values = [];
+    //let values = [];
     let max1_values = [];
     let max2_values = [];
     let max3_values = [];
@@ -48,8 +50,13 @@ function getFeatures(id) {
     
     for (var i = 0; i < 50; i++) {
       labels.push(i);
+      let seg_list = feature[i]["pitches"]
+      var max_value = Math.max(seg_list)
+      var max_index = seg_list.indexOf(max_value)
+      values.push(max_index)
       
-    
+      
+    /**
       var index = 0;
       for (var j = 0; j < feature[i]["pitches"].length; j++){
         if (feature[i]["pitches"][index] < feature[i]["pitches"][j]) {
@@ -57,10 +64,9 @@ function getFeatures(id) {
         }
       }
       values.push(index);
-      
       duration.push(feature[i]["duration"])
     }
-    
+    **/
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -69,26 +75,26 @@ function getFeatures(id) {
             label: "max1",
             type: "line",
             borderColor: "#000000",
-            data: [408,547,675,734],
+            data: max1_values,
             fill: false
           }, {
             label: "max2",
             type: "line",
             borderColor: "#3e95cd",
-            data: [133,221,783,2478],
+            data: max2_values,
             fill: false
           }, {
             label: "max3",
             type: "line",
             borderColor: "#8e5ea2",
-            data: [408,547,675,734],
+            data: max3_values,
           }
         ]
       },
       options: {
         title: {
           display: true,
-          text: 'Population growth (millions): Europe & Africa'
+          text: 'Top Three Notes in the Segments'
         },
         legend: { display: false }
       }
@@ -117,8 +123,11 @@ $(function() {
     
       data.tracks.items.forEach(function(track, index) {
         resultIDs.push(track.id);
-        let newEl = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
+        let newEl1 = $('<h2 class="text-salmon"></h2>').text(track.name + '   |   ' + track.artists[0].name);
+        let newEl2 = $('<p class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></p>').text('Click here to get basic track overview');
+        let newEl3 = $('<p class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></p>').text('See melody and chord progressions');
         $('#results').append(newEl);
+        $('#results').append(newEl2);
         
       
       }); 
