@@ -26,12 +26,14 @@ function getFeatures(id) {
     let labels = [];
     let values = [];
     
-    var feature = data["bars"]
+    var feature = data["sections"]
     
     for (var i = 0; i < feature.length; i++) {
       labels.push(i);
-      values.push(feature[i]["confidence"]);
+      values.push(feature[i]["tempo_confidence"]);
     }
+    
+    //labels = labels.slice(0,100)
     /*
     for (var feature in data) {
       labels.push(feature);
@@ -58,7 +60,7 @@ function getFeatures(id) {
   
     
     var myChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: labels,
           datasets: [{
