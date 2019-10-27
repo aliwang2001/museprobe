@@ -33,6 +33,7 @@ function getAnalysis(id) {
     console.log(data)
     
     let labels = [];
+    
     let max1_values = [];
     let max2_values = [];
     let max3_values = [];
