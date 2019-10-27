@@ -25,6 +25,10 @@ function getFeatures(id) {
     
     let labels = [];
     let values = [];
+    let max1_values = [];
+    let max2_values = [];
+    let max3_values = [];
+    let duration = [];
     
     var feature = data["segments"];
     var pitch = {
@@ -45,6 +49,7 @@ function getFeatures(id) {
     for (var i = 0; i < 50; i++) {
       labels.push(i);
       
+    
       var index = 0;
       for (var j = 0; j < feature[i]["pitches"].length; j++){
         if (feature[i]["pitches"][index] < feature[i]["pitches"][j]) {
@@ -52,27 +57,41 @@ function getFeatures(id) {
         }
       }
       values.push(index);
+      
+      duration.push(feature[i]["duration"])
     }
     
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: labels,
-          datasets: [{
-            data: values,
-            }]
+        datasets: [{
+            label: "max1",
+            type: "line",
+            borderColor: "#000000",
+            data: [408,547,675,734],
+            fill: false
+          }, {
+            label: "max2",
+            type: "line",
+            borderColor: "#3e95cd",
+            data: [133,221,783,2478],
+            fill: false
+          }, {
+            label: "max3",
+            type: "line",
+            borderColor: "#8e5ea2",
+            data: [408,547,675,734],
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Population growth (millions): Europe & Africa'
         },
-        options: {
-            legend: {
-              display: false
-           },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true                    }
-                }]
-            }
-        }
+        legend: { display: false }
+      }
     });
   });
   
