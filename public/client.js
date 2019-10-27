@@ -16,11 +16,11 @@ function getFeatures(id) {
   let query = '/features?id=' + id;
   
   $.get(query, function(data) {
-    let labels = ["keys", "tempo", "time signature"];
+    //let labels = ["keys", "tempo", "time signature"];
     var key = data["key"];
     var tempo = data["tempo"];
     var time_signature = data["time_signature"];
-    let values = [key, tempo, time_signature];
+    //let values = [key, tempo, time_signature];
 });
 }
 
@@ -64,29 +64,29 @@ function getAnalysis(id) {
     }
     
     let bubble_data = []
-    var k = 2
+    var k = 5
     for (var i = 0; i < max_labels.length; i++) {
-      let dict = {};
-      dict["x"] = max_labels[i];
-      dict["y"] = max1_indices[i];
-      dict["r"] = Math.sqrt(max1_values[i]) * k;
-      bubble_data.push(dict)
+      var dict = {};
+      dict.x = i;
+      dict.y = max1_indices[i];
+      dict.r = Math.sqrt(max1_values[i]) * k;
+      bubble_data.push(dict);
     }
     
     for (var i = 0; i < max_labels.length; i++) {
-      let dict = {};
-      dict["x"] = max_labels[i];
-      dict["y"] = max2_indices[i];
-      dict["r"] = Math.sqrt(max2_values[i]) * k;
-      bubble_data.push(dict)
+      var dict = {};
+      dict.x = i;
+      dict.y = max2_indices[i];
+      dict.r = Math.sqrt(max2_values[i]) * k;
+      bubble_data.push(dict);
     }
     
     for (var i = 0; i < max_labels.length; i++) {
-      let dict = {};
-      dict["'x"'] = max_labels[i];
-      dict['y'] = max3_indices[i];
-      dict['r'] = Math.sqrt(max3_values[i]) * k;
-      bubble_data.push(dict)
+      var dict = {};
+      dict.x = i;
+      dict.y = max3_indices[i];
+      dict.r = Math.sqrt(max3_values[i]) * k;
+      bubble_data.push(dict);
     }
     
     /*
@@ -112,11 +112,22 @@ function getAnalysis(id) {
     });
   });
   */
+    
+    var options = {responsive: true, // Instruct chart js to respond nicely.
+    maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+};
+    
     var myChart = new Chart(ctx, {
-      label: "don't matta",
       type: 'bubble',
-      data: bubble_data,
-      options: Chart.defaults.bubble
+      data: {
+        datasets: [{
+                label: 'yikes', // Name the series
+                data: bubble_data, // Specify the data values array
+          borderColor: '#2196f3', // Add custom color border            
+          backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            }]
+      },
+      options: options
 });
     /*
     var myChart = new Chart(ctx, {
