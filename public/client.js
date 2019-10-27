@@ -21,8 +21,11 @@ function getFeatures(id) {
     var tempo = data["tempo"];
     var time_signature = data["time_signature"];
     
-    //let values = [key, tempo, time_signature];
-});
+  document.getElementById("key").innerHTML = "Key is: " + key;
+  document.getElementById("tempo").innerHTML = "Tempo is: " + tempo;
+  document.getElementById("time_sign").innerHTML = "Time signature is: " + time_signature;
+    
+  });
 }
 
 
@@ -64,14 +67,16 @@ function getAnalysis(id) {
       max3_values.push(seg_list[max3_index]);
     }
     
-    let bubble_data = []
+    let bubble_data1 = []
+    let bubble_data2 = []
+    let bubble_data3 = []
     var k = 20;
     for (var i = 0; i < max_labels.length; i++) {
       var dict = {};
       dict.x = i;
       dict.y = max1_indices[i];
       dict.r = Math.sqrt(max1_values[i]) * k;
-      bubble_data.push(dict);
+      bubble_data1.push(dict);
     }
     
     for (var i = 0; i < max_labels.length; i++) {
@@ -79,7 +84,7 @@ function getAnalysis(id) {
       dict.x = i;
       dict.y = max2_indices[i];
       dict.r = Math.sqrt(max2_values[i]) * k;
-      bubble_data.push(dict);
+      bubble_data2.push(dict);
     }
     
     for (var i = 0; i < max_labels.length; i++) {
@@ -87,7 +92,7 @@ function getAnalysis(id) {
       dict.x = i;
       dict.y = max3_indices[i];
       dict.r = Math.sqrt(max3_values[i]) * k;
-      bubble_data.push(dict);
+      bubble_data3.push(dict);
     }
     
     /*
@@ -121,10 +126,16 @@ function getAnalysis(id) {
       type: 'bubble',
       data: {
         datasets: [{
-                data: bubble_data, // Specify the data values array
+                data: bubble_data1, // Specify the data values array
                 borderColor: '#2196f3', // Add custom color border            
                 backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
-            }]
+            }, {data: bubble_data2, 
+                borderColor: '#2196f3',            
+                backgroundColor: '#2196f3', 
+            }, {data: bubble_data3, 
+                borderColor: '#2196f3',            
+                backgroundColor: '#2196f3', 
+            } ]
       },
       options: options
 });
@@ -187,10 +198,10 @@ $(function() {
       data.tracks.items.forEach(function(track, index) {
         resultIDs.push(track.id);
         let newEl1 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
-        //let newEl2 = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text('Click here to get basic track overview');
+        let newEl2 = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text('Basic Track Overview');
         //let newEl3 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text('See melody and chord progressions');
         $('#results').append(newEl1);
-        //$('#results').append(newEl2);
+        $('#results').append(newEl2);
         //$('#results').append(newEl2);
         
       
