@@ -20,6 +20,7 @@ function getFeatures(id) {
     var key = data["key"];
     var tempo = data["tempo"];
     var time_signature = data["time_signature"];
+    
     //let values = [key, tempo, time_signature];
 });
 }
@@ -64,7 +65,7 @@ function getAnalysis(id) {
     }
     
     let bubble_data = []
-    var k = 5
+    var k = 20;
     for (var i = 0; i < max_labels.length; i++) {
       var dict = {};
       dict.x = i;
@@ -114,17 +115,15 @@ function getAnalysis(id) {
   */
     
     var options = {responsive: true, // Instruct chart js to respond nicely.
-    maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
 };
     
     var myChart = new Chart(ctx, {
       type: 'bubble',
       data: {
         datasets: [{
-                label: 'yikes', // Name the series
                 data: bubble_data, // Specify the data values array
-          borderColor: '#2196f3', // Add custom color border            
-          backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+                borderColor: '#2196f3', // Add custom color border            
+                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
             }]
       },
       options: options
@@ -165,7 +164,7 @@ function getAnalysis(id) {
 }
 */
 });
-        }
+}
         
 $(function() {
   //console.log('hello world :o');
