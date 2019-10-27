@@ -16,7 +16,9 @@ function getFeatures(id) {
   let query = '/features?id=' + id;
   
   $.get(query, function(data) {
-    
+    var key = data["key"];
+    var tempo = data["tempo"];
+    var time_signature = data["time_signature"];
 });
 }
 
@@ -32,14 +34,17 @@ function getAnalysis(id) {
     
     console.log(data)
     
-    let labels = [];
-    
+    let max_labels = [];
+    let max1_indices = [];
     let max1_values = [];
+    let max2_indices = [];
     let max2_values = [];
+    let max3_indices = [];
     let max3_values = [];
     let duration = [];
     
     var feature = data["segments"];
+    var more_feature = data["sections"];
     var pitch = {
       0: "C",
       1: "C#",
@@ -56,17 +61,24 @@ function getAnalysis(id) {
     }
     
     for (var i = 0; i < 20; i++) {
-      labels.push(i);
+      max_labels.push(i);
       let seg_list = feature[i]["pitches"];
       var max1_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
-      max1_values.push(max1_index);
+      max1_indices.push(max1_index);
+      max1_values.push(seg_list[max1_index]);
       seg_list[max1_index] = 0;
       var max2_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
-      max2_values.push(max2_index);
+      max2_indices.push(max2_index);
+      max2_values.push(seg_list[max2_index]);
       seg_list[max2_index] = 0;
       var max3_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
-      max3_values.push(max3_index);
+      max3_indices.push(max3_index);
+      max3_values.push(seg_list[max3_index]);
     }
+    
+    data = []
+    
+    
     
       
     /**
@@ -104,11 +116,20 @@ function getAnalysis(id) {
     });
   });
   */
-    
+    var myBubbleChart = new Chart(ctx, {
+      animation: {
+				duration: 1000
+			},
+      label: ""
+      type: 'bubble',
+      data: data,
+      options: options
+});
+    /*
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: labels,
+        labels: max_labels,
         datasets: [{
             label: "max1",
             type: "bar",
@@ -137,8 +158,8 @@ function getAnalysis(id) {
     });
   });
   
-
 }
+*/
 
 $(function() {
   //console.log('hello world :o');
