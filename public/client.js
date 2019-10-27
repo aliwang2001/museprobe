@@ -36,7 +36,6 @@ function getFeatures(id) {
     }
   
     
-    /*
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -82,7 +81,6 @@ function getFeatures(id) {
             }
         }
     });
-    */
   });
   
 
