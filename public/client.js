@@ -54,20 +54,17 @@ function getAnalysis(id) {
       11: "B"
     }
     
-    for (var i = 0; i < 50; i++) {
+    for (var i = 0; i < 20; i++) {
       labels.push(i);
-      let seg_list = feature[i]["pitches"]
-      var max1_value = Math.max(seg_list)
-      var max1_index = seg_list.indexOf(max1_value)
-      max1_values.push(max1_index)
-      seg_list.splice(max1_index, 1)
-      var max2_value = Math.max(seg_list)
-      var max2_index = seg_list.indexOf(max2_value)
-      max2_values.push(max2_index)
-      seg_list.splice(max2_index, 1)
-      var max3_value = Math.max(seg_list)
-      var max3_index = seg_list.indexOf(max3_value)
-      max3_values.push(max3_index)
+      let seg_list = feature[i]["pitches"];
+      var max1_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+      max1_values.push(max1_index);
+      seg_list.splice(max1_index, 1);
+      var max2_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+      max2_values.push(max2_index);
+      seg_list.splice(max2_index, 1);
+      var max3_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+      max3_values.push(max3_index);
     }
     
       
@@ -82,14 +79,18 @@ function getAnalysis(id) {
       duration.push(feature[i]["duration"])
     }
     **/
+    
+    /*
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: labels,
         datasets: [
           {
-            label: "Population (millions)",
-            data: max1_values
+            data: max1_values,
+            ticks: {
+                min: 0
+            }
           }
         ]
       },
@@ -97,12 +98,12 @@ function getAnalysis(id) {
         legend: { display: false },
         title: {
           display: true,
-          text: 'Predicted world population (millions) in 2050'
         }
       }
     });
   });
-    /*
+  */
+    
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -134,7 +135,6 @@ function getAnalysis(id) {
       }
     });
   });
-  */
   
 
 }
