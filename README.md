@@ -1,27 +1,23 @@
-Welcome to the Glitch BETA
+MUSEPROBE - CalHacks 6.0
 =========================
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
 
-Glitch is a developer playground that lets you code a real web-app without the slow setup and deployment steps.
-
-[About Glitch](https://glitch.com/about)
-
+See the app live [here](https://museprobe.glitch.me)
 
 Your Project
 ------------
 
 On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env`
+- the app starts at `server.js`
+- calls on the Spotify API for song searching, audio analysis, and audio features
+- most of the data processing is found in `public/client.js`, as well as how we implemented the chord progression bubble chart
 
 On the front-end,
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
+- the app uses the Bootstrap framework and Chart.js for data visualization
+
+This project was built on Glitch, a developer playground that lets you code a real web-app without the slow setup and deployment steps.
+[About Glitch](https://glitch.com/about)
 
 
-Made by Fog Creek
+Made by jo
 -----------------
-
-\ ゜o゜)ノ
