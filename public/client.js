@@ -19,20 +19,39 @@ function getFeatures(id) {
   let query = '/features?id=' + id;
   let a_query = '/analysis?id=' + id;
 
-  $.get(query, function(data) {
+  $.get(a_query, function(data) {
     
     console.log(data)
     
     let labels = [];
     let values = [];
+    let deets = [];
     
     for (var feature in data) {
-      if (data.hasOwnProperty(feature) && (feature != 'key' || feature != 'mode')) {
-        
+      for(var details in feature) {
         labels.push(feature);
-        values.push(data[feature]);
-        }
+        values.push(data[feature])
+        deets.push(data[feature][details])
+        
+      }
     }
+    
+    console.log("DETAILS")
+    console.log(deets)
+    console.log("LABELS")
+    console.log(labels)
+    console.log("VALUES")
+    console.log(values)
+    /*
+    for (var feature in data) {
+      if (data.hasOwnProperty(feature)) {
+        if(data[feature] >= 0){
+          labels.push(feature);
+          values.push(data[feature]);
+        }
+      }
+    }
+    */
   
     
     var myChart = new Chart(ctx, {

@@ -34,7 +34,7 @@ app.get("/", function (request, response) {
 });
 
 app.get("/search", function (request, response) {
-  spotifyApi.searchTracks(request.query.query, { limit: 10 })
+  spotifyApi.searchTracks(request.query.query, { limit: 1 })
   .then(function(data) {
     console.log(data.body);
     response.send(data.body);
@@ -56,7 +56,7 @@ app.get("/features", function (request, response) {
 app.get("/analysis", function (request, response) {
   spotifyApi.getAudioAnalysisForTrack(request.query.id)
   .then(function(data) {
-    console.log(data.body);
+    //console.log(data.body);
     response.send(data.body);
   }, function(err) {
     console.log(err)
