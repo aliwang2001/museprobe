@@ -49,8 +49,6 @@ var modes = {
   });
 }
 
-
-
 function getAnalysis(id) {
   
   resetCanvas();
@@ -72,7 +70,7 @@ function getAnalysis(id) {
     
     var feature = data["segments"];
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 20; i++) {
       max_labels.push(i);
       let seg_list = feature[i]["pitches"];
       var max1_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
@@ -91,7 +89,7 @@ function getAnalysis(id) {
     let bubble_data1 = []
     let bubble_data2 = []
   
-    var k = 10;
+    var k = 15;
     for (var i = 0; i < max_labels.length; i++) {
       var dict = {};
       dict.x = i;
@@ -116,32 +114,8 @@ function getAnalysis(id) {
       bubble_data2.push(dict);
     }
     
-    /*
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            data: max1_values,
-            ticks: {
-                min: 0
-            }
-          }
-        ]
-      },
-      options: {
-        legend: { display: false },
-        title: {
-          display: true,
-        }
-      }
-    });
-  });
-  */
-    
     var options = {responsive: true, // Instruct chart js to respond nicely.
-};
+      };
     
     var myChart = new Chart(ctx, {
       type: 'bubble',
@@ -162,17 +136,19 @@ function getAnalysis(id) {
         scales: {
           yAxes: [{
             ticks: {     
-            },
+            
                 callback: function(value, index, values) {
                     // for a value (tick) equals to 8
                     return keys[value];
                     // 'junior-dev' will be returned instead and displayed on your chart
                 }
             }
-        ]
+          }]
+        }
     }
-}
+  });
 });
+}
     /*
     var myChart = new Chart(ctx, {
       type: 'bar',
@@ -205,11 +181,8 @@ function getAnalysis(id) {
       }
     });
   });
-  
 }
 */
-});
-}
         
 $(function() {
   //console.log('hello world :o');
