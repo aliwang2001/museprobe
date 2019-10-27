@@ -19,7 +19,7 @@ function getFeatures(id) {
   let query = '/features?id=' + id;
   let a_query = '/analysis?id=' + id;
 
-  $.get(a_query, function(data) {
+  $.get(query, function(data) {
     
     console.log(data)
     
@@ -27,7 +27,8 @@ function getFeatures(id) {
     let values = [];
     
     for (var feature in data) {
-      if (data.hasOwnProperty(feature) && (feature == 'key' || feature == 'mode')) {
+      if (data.hasOwnProperty(feature) && (feature != 'key' || feature != 'mode')) {
+        
         labels.push(feature);
         values.push(data[feature]);
         }
