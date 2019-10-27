@@ -51,7 +51,7 @@ function getFeatures(id) {
           index = j;
         }
       }
-      values.push(pitch[index]);
+      values.push(index);
     }
     
     var myChart = new Chart(ctx, {
@@ -67,10 +67,10 @@ function getFeatures(id) {
               display: false
            },
             scales: {
-                xAxes: [{
-                type: 'category',
-                labels: values
-              }]
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true                    }
+                }]
             }
         }
     });
