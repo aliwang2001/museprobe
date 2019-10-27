@@ -27,8 +27,22 @@ function getFeatures(id) {
     let values = [];
     
     var feature = data["segments"];
+    var pitch = {
+      0: "C",
+      1: "C#",
+      2: "D",
+      3: "D#",
+      4: "E",
+      5: "F",
+      6: "F#",
+      7: "G",
+      8: "G#",
+      9: "A",
+      10: "A#",
+      11: "B"
+    }
     
-    for (var i = 0; i < feature.length; i++) {
+    for (var i = 0; i < 50; i++) {
       labels.push(i);
       
       var index = 0;
@@ -37,11 +51,8 @@ function getFeatures(id) {
           index = j;
         }
       }
-      values.push(index);
+      values.push(pitch[index]);
     }
-    
-    values = values.slice(0, 50);
-    labels = labels.slice(0, 50);
     
     var myChart = new Chart(ctx, {
       type: 'bar',
@@ -56,10 +67,10 @@ function getFeatures(id) {
               display: false
            },
             scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true                    }
-                }]
+                xAxes: [{
+                type: 'category',
+                labels: values
+              }]
             }
         }
     });
