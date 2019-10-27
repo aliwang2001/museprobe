@@ -207,12 +207,10 @@ $(function() {
         let newEl1 = $('<p class="text-salmon"></p>').text(track.name + '   |   ' + track.artists[0].name);
         let newEl2 = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text('Basic Track Overview');
         let newEl3 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text('Chord Progressions');
-        //let newEl3 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text('See melody and chord progressions');
         $('#results').append(newEl1);
         $('#results').append(newEl2);
         $('#results').append(newEl3);
         
-      
       }); 
       
     });
