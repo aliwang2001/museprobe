@@ -16,9 +16,11 @@ function getFeatures(id) {
   let query = '/features?id=' + id;
   
   $.get(query, function(data) {
+    let labels = ["keys", "tempo", "time signature"];
     var key = data["key"];
     var tempo = data["tempo"];
     var time_signature = data["time_signature"];
+    let values = [key, tempo, time_signature];
 });
 }
 
@@ -44,23 +46,8 @@ function getAnalysis(id) {
     let duration = [];
     
     var feature = data["segments"];
-    var more_feature = data["sections"];
-    var pitch = {
-      0: "C",
-      1: "C#",
-      2: "D",
-      3: "D#",
-      4: "E",
-      5: "F",
-      6: "F#",
-      7: "G",
-      8: "G#",
-      9: "A",
-      10: "A#",
-      11: "B"
-    }
-    
-    for (var i = 0; i < 20; i++) {
+
+    for (var i = 0; i < 10; i++) {
       max_labels.push(i);
       let seg_list = feature[i]["pitches"];
       var max1_index = seg_list.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
@@ -76,22 +63,31 @@ function getAnalysis(id) {
       max3_values.push(seg_list[max3_index]);
     }
     
-    data = []
-    
-    
-    
-      
-    /**
-      var index = 0;
-      for (var j = 0; j < feature[i]["pitches"].length; j++){
-        if (feature[i]["pitches"][index] < feature[i]["pitches"][j]) {
-          index = j;
-        }
-      }
-      values.push(index);
-      duration.push(feature[i]["duration"])
+    let bubble_data = []
+    var k = 2
+    for (var i = 0; i < max_labels.length; i++) {
+      let dict = {};
+      dict["x"] = max_labels[i];
+      dict["y"] = max1_indices[i];
+      dict["r"] = Math.sqrt(max1_values[i]) * k;
+      bubble_data.push(dict)
     }
-    **/
+    
+    for (var i = 0; i < max_labels.length; i++) {
+      let dict = {};
+      dict["x"] = max_labels[i];
+      dict["y"] = max2_indices[i];
+      dict["r"] = Math.sqrt(max2_values[i]) * k;
+      bubble_data.push(dict)
+    }
+    
+    for (var i = 0; i < max_labels.length; i++) {
+      let dict = {};
+      dict["'x"'] = max_labels[i];
+      dict['y'] = max3_indices[i];
+      dict['r'] = Math.sqrt(max3_values[i]) * k;
+      bubble_data.push(dict)
+    }
     
     /*
     var myChart = new Chart(ctx, {
@@ -116,14 +112,11 @@ function getAnalysis(id) {
     });
   });
   */
-    var myBubbleChart = new Chart(ctx, {
-      animation: {
-				duration: 1000
-			},
-      label: ""
+    var myChart = new Chart(ctx, {
+      label: "don't matta",
       type: 'bubble',
-      data: data,
-      options: options
+      data: bubble_data,
+      options: Chart.defaults.bubble
 });
     /*
     var myChart = new Chart(ctx, {
@@ -160,7 +153,9 @@ function getAnalysis(id) {
   
 }
 */
-
+});
+        }
+        
 $(function() {
   //console.log('hello world :o');
   
