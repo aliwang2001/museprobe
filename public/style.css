@@ -10,6 +10,7 @@
 
 body {
   padding: 5vh 5vw;
+  font-family: "Sans-Serif"
 }
 
 p {
@@ -38,6 +39,7 @@ footer > a {
 .nicejob {
   text-decoration: line-through;
 }
+
 
 #results {
   display: flex;

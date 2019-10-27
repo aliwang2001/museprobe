@@ -153,7 +153,7 @@ function getAnalysis(id) {
                 borderColor: '#4e7eef', // Add custom color border            
                 backgroundColor: '#6e96f2', // Add custom color background (Points and Fill)
             }, {
-                label: "Chord Notes",
+                label: "Accompanying Notes",
                 data: bubble_data2, 
                 borderColor: '#eb9e24',            
                 backgroundColor: '#efb557', 
@@ -219,13 +219,13 @@ $(function() {
     
       data.tracks.items.forEach(function(track, index) {
         resultIDs.push(track.id);
-        let newEl1 = $('<h2 class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></h2>').text(track.name + '   |   ' + track.artists[0].name);
+        let newEl1 = $('<h2 class="text-salmon"></h2>').text(track.name + '   |   ' + track.artists[0].name);
         let newEl2 = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text('Basic Track Overview');
-        let newEl3 = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text('Chord Progressions');
+        let newEl3 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text('Chord Progressions');
         //let newEl3 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text('See melody and chord progressions');
         $('#results').append(newEl1);
         $('#results').append(newEl2);
-        //$('#results').append(newEl2);
+        $('#results').append(newEl3);
         
       
       }); 
