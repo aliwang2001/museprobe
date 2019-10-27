@@ -13,17 +13,39 @@ function resetCanvas() {
 };
 
 function getFeatures(id) {
+  
+  var keys = {
+  0: "C",
+  1: "C#/D♭",
+  2: "D",
+  3: "D#/E♭",
+  4: "E",
+  5: "F",
+  6: "F#/G♭",
+  7: "G",
+  8: "G#/A♭",
+  9: "A",
+  10: "A#/B♭",
+  11: "B"
+  
+}
+var modes = {
+  0: "minor",
+  1: "Major"
+}
+
   let query = '/features?id=' + id;
   
   $.get(query, function(data) {
     //let labels = ["keys", "tempo", "time signature"];
     var key = data["key"];
     var tempo = data["tempo"];
+    var mode = data["mode"];
     var time_signature = data["time_signature"];
     
-  document.getElementById("key").innerHTML = "Key is: " + key;
-  document.getElementById("tempo").innerHTML = "Tempo is: " + tempo;
-  document.getElementById("time_sign").innerHTML = "Time signature is: " + time_signature;
+  document.getElementById("key").innerHTML = "Key: " + keys[key] + " " + modes[mode];
+  document.getElementById("tempo").innerHTML = "Tempo: " + tempo + " BPM";
+  document.getElementById("time_sign").innerHTML = "Time signature: " + time_signature + " beats per measure";
     
   });
 }
@@ -69,8 +91,8 @@ function getAnalysis(id) {
     
     let bubble_data1 = []
     let bubble_data2 = []
-    let bubble_data3 = []
-    var k = 20;
+  
+    var k = 10;
     for (var i = 0; i < max_labels.length; i++) {
       var dict = {};
       dict.x = i;
@@ -92,7 +114,7 @@ function getAnalysis(id) {
       dict.x = i;
       dict.y = max3_indices[i];
       dict.r = Math.sqrt(max3_values[i]) * k;
-      bubble_data3.push(dict);
+      bubble_data2.push(dict);
     }
     
     /*
@@ -126,16 +148,16 @@ function getAnalysis(id) {
       type: 'bubble',
       data: {
         datasets: [{
+                label: "Leading Notes",
                 data: bubble_data1, // Specify the data values array
-                borderColor: '#2196f3', // Add custom color border            
-                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
-            }, {data: bubble_data2, 
-                borderColor: '#2196f3',            
-                backgroundColor: '#2196f3', 
-            }, {data: bubble_data3, 
-                borderColor: '#2196f3',            
-                backgroundColor: '#2196f3', 
-            } ]
+                borderColor: '#4e7eef', // Add custom color border            
+                backgroundColor: '#6e96f2', // Add custom color background (Points and Fill)
+            }, {
+                label: "Chord Notes",
+                data: bubble_data2, 
+                borderColor: '#eb9e24',            
+                backgroundColor: '#efb557', 
+            }]
       },
       options: options
 });
@@ -197,8 +219,9 @@ $(function() {
     
       data.tracks.items.forEach(function(track, index) {
         resultIDs.push(track.id);
-        let newEl1 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text(track.name + '   |   ' + track.artists[0].name);
+        let newEl1 = $('<h2 class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></h2>').text(track.name + '   |   ' + track.artists[0].name);
         let newEl2 = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text('Basic Track Overview');
+        let newEl3 = $('<li class="text-salmon" onClick="getFeatures(&apos;' + track.id + '&apos;)"></li>').text('Chord Progressions');
         //let newEl3 = $('<li class="text-salmon" onClick="getAnalysis(&apos;' + track.id + '&apos;)"></li>').text('See melody and chord progressions');
         $('#results').append(newEl1);
         $('#results').append(newEl2);
